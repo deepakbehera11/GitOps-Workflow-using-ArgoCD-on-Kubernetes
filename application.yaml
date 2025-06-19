@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/deepakbehera11/GitOps-Workflow-using-ArgoCD-on-Kubernetes'
+    repoURL: 'https://github.com/deepakbehera11/GitOps-Workflow-using-ArgoCD-on-Kubernetes/tree/main'
     targetRevision: HEAD
     path: .
   destination:
