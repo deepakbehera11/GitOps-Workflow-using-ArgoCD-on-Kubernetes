@@ -39,16 +39,24 @@ ssh -i "YourKey.pem" -L 8080:localhost:8080 ubuntu@your-remote-ip
 ![](https://github.com/deepakbehera11/GitOps-Workflow-using-ArgoCD-on-Kubernetes/blob/eb7173ee65c3a7b59d567875a39ccd6a72e27060/assests/Screenshot-01.png)
 
 ### kubectl edit svc argocd-server -n argocd → Changing the clusterIP to NodePort
-### - Now we can access the ArgoCD UI thru local host → localhost:8080 to get the ArgoCD password to login
-
+### - Now we can access the ArgoCD UI thru local host → localhost:8080 
+### to get the ArgoCD password to login
+```
+kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
+```
 
 ### Creating deployment.yaml, service.yaml for my Nginx application, then
 ### configuring application.yaml files to sync my Git repository with my Kubernetes cluster 
 ### pushing them to my Github Repo
 ### then refreshing the ArgoCD 
+![](https://github.com/deepakbehera11/GitOps-Workflow-using-ArgoCD-on-Kubernetes/blob/f98ad7c913b54b58298e8260a922b2f8e976bed2/assests/Screenshot-02.png)
+![](https://github.com/deepakbehera11/GitOps-Workflow-using-ArgoCD-on-Kubernetes/blob/f98ad7c913b54b58298e8260a922b2f8e976bed2/assests/Screenshot-03.png)
+
 ### Updated replicas via git commits
+![](https://github.com/deepakbehera11/GitOps-Workflow-using-ArgoCD-on-Kubernetes/blob/f98ad7c913b54b58298e8260a922b2f8e976bed2/assests/Screenshot-04.png)
+
 ### - kubectl get svc nginx-service → gives the port no. for nginx,
-- enabling the port in security group of the instance and then accessing it
+## enabling the port in security group of the instance and then accessing my nginx
 
 
 
