@@ -13,13 +13,34 @@ Implement GitOps to automate Kubernetes deployments by syncing with a GitHub rep
 ## ⚙️ Setup Step
 ### Taking Ubuntu instance with t3.medium  
 ### Install K3s on EC2
+```
+ curl -sfL https://get.k3s.io | sh -
+```
 ### Setting kubectl for the current user 
-### Installing ArgoCD 
+```
+mkdir -p $HOME/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+### Installing ArgoCD
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
 ### Accessing ArgoCD securely thru local from terminal
+```
+nohup kubectl port-forward svc/argocd-server -n argocd 8080:8083 > portforward.log 2>&1 &
+ssh -i "YourKey.pem" -L 8080:localhost:8080 ubuntu@your-remote-ip
+```
+
+
+### Checking the nodes - kubectl get nodes
+![](https://github.com/deepakbehera11/GitOps-Workflow-using-ArgoCD-on-Kubernetes/blob/eb7173ee65c3a7b59d567875a39ccd6a72e27060/assests/Screenshot-01.png)
+
 ### kubectl edit svc argocd-server -n argocd → Changing the clusterIP to NodePort
-### - Now we can access the ArgoCD UI thru local host → localhost:8080
-- to get the ArgoCD password to login
-![]()
+### - Now we can access the ArgoCD UI thru local host → localhost:8080 to get the ArgoCD password to login
+
 
 ### Creating deployment.yaml, service.yaml for my Nginx application, then
 ### configuring application.yaml files to sync my Git repository with my Kubernetes cluster 
