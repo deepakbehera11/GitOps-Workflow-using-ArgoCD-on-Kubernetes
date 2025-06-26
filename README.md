@@ -56,7 +56,7 @@ kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.pas
 ![](https://github.com/deepakbehera11/GitOps-Workflow-using-ArgoCD-on-Kubernetes/blob/f98ad7c913b54b58298e8260a922b2f8e976bed2/assests/Screenshot-04.png)
 
 ### - kubectl get svc nginx-service → gives the port no. for nginx,
-## enabling the port in security group of the instance and then accessing my nginx
+### enabling the port in security group of the instance and then accessing my nginx
 
 
 
